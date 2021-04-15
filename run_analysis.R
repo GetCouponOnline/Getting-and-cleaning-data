@@ -49,24 +49,24 @@ merged_data <- rbind(
 )
 colnames(merged_data) <- c("Subject", features[, 2], "Activity")
 
-merged_data
 # STEP2: Extracts only the measurements on the mean and standard deviation for each measurement. 
 merged_data <- merged_data[, grep("mean\\(\\)|std\\(\\)|Subject|Activity", colnames(merged_data))]
 
-merged_data$activity
 # STEP3: Uses descriptive activity names to name the activities in the data set
 merged_data$Activity<- factor(merged_data$Activity, levels = activities[[1]], labels = activities[[2]])
 
 # STEP4: Appropriately labels the data set with descriptive variable names
 data_cols <- colnames(merged_data)
 
-data_cols <- gsub("[\\(\\)-]", "", data_cols)
+data_cols
+
+
+data_cols <- gsub("[\\(\\)]", "", data_cols)
 data_cols <- gsub("^f", "FrequencyDomain", data_cols)
 data_cols <- gsub("^t", "TimeDomain", data_cols)
 data_cols <- gsub("Acc", "Accelerometer", data_cols)
 data_cols <- gsub("Gyro", "Gyroscope", data_cols)
 data_cols <- gsub("Mag", "Magnitude", data_cols)
-data_cols <- gsub("Freq", "Frequency", data_cols)
 data_cols <- gsub("mean", "Mean", data_cols)
 data_cols <- gsub("std", "StandardDeviation", data_cols)
 data_cols <- gsub("BodyBody", "Body", data_cols)
@@ -83,6 +83,7 @@ tidy_data <- merged_data %>%
 
 tidy_data_names <- c(names(tidy_data[c(1,2)]), paste0("Average-", names(tidy_data[-c(1, 2)])))
 names(tidy_data) <- tidy_data_names
+str(tidy_data)
 
 tidy_data_filename="tidy_data.txt"
 
@@ -91,3 +92,4 @@ if(file.exists(tidy_data_filename)){
 }
 
 write.table(tidy_data, tidy_data_filename, row.names = FALSE)
+
