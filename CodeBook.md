@@ -25,26 +25,6 @@ Full description is available under http://archive.ics.uci.edu/ml/datasets/Human
 ### Guide to create the tidy data file
 To create the tidy data file one needs to run the 'run_analysis.R' script. The script checks the working directory for the 'UCI HAR Dataset' folder and if it's not present downloads the data and unpacks it. Later the data is cleaned and the oustcome is saved to the 'tidy_data.txt' file.
 
-### Cleaning of the data
-Cleaning part consists of the following steps:
-
-1. Merging of the train and test sets into one data frame.
-2. Only measurements providing informatiion on mean or standard deviation have been left. Particularly, all names not containing 'mean' or 'std' have been discarded (except for 'Subject' and 'Activity' fields).
-3. Replacement of the activity identifiers ( numbers from 1 to 6) by the corresponding activity names from the "activity_labels.txt".
-4. Replaccement of the column names by the ones which are more descriptive.
-    a. All special symbols except for dashes were removed. Dashes have been left for better readability.
-    b. Abbreviations have been removed:
-         + 'f' -> 'FrequencyDomain' 
-         + 't' -> 'TimeDomain'
-         + 'Acc' -> 'Accelerometer'
-         + 'Gyro' -> 'Gyroscope'
-         + 'Mag' -> 'Magnitude'
-         + 'mean' -> 'Mean
-         + 'std' -> 'StandardDeviation'
-    c. One spelling mistake have been removed:
-        + 'BodyBody' -> 'Body'
-5. The final tidy dataset is created with measurements substitud by their average for each activity and each subject.
-
 ## Description of the variables in the tiny_data.txt file
 Th dataset contains 68 variables, two of which are identifiers ('Subject' and 'Activity'), the rest is measurements. 
 
